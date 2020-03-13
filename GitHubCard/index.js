@@ -79,21 +79,41 @@ function myNewCard (gitHubInfo) {
 */
 
 
+const friendsArray = ['tetondan', 'dustinmyers', 'justsml', 'luishrd', 'bigknell'];
+i = 0;
+friendsArray.forEach ((user, i) => {
+  axios.get(`https://api.github.com/users/${friendsArray[i]}`)
+    .then(response => {
+      console.log(response.data);
+      const info = response.data;
+      const cards = document.querySelector('.cards');
+      const cardInfo = myNewCard(info);
+      console.log(cardInfo);
+      cards.append(cardInfo);
+    })
+    .catch(error => {
+      console.log('you done messsed up',error);
+    })
+    console.log(friendsArray);
+})
 
-axios.get('https://api.github.com/users/Tannerwill756/followers')
-  .then(response =>{
-    // console.log(response.data);
-    console.log(response.data);
-    const followersArray = myNewCard(response.data);
-    const cards = document.querySelector('.cards');
-    cards.append(followersArray);
+  // axios.get('https://api.github.com/users/Tannerwill756/followers')
+  //   .then(response => {
+  //     console.log(response.data);
+  //     const followersArray = response.data;
+      
+  //     followersArray.forEach((item) => {
+  //       friendsArray.push(item.login);
+  //       
+  //     })
+  //     myNewCard(friendsArray);
+  //     // console.log(followersArray);
+  //   })
+  //   .catch(error => {
+  //     console.log(error);
+  //   })
 
-  })
-  .catch(error => {
-    console.log(error)
-  })
-
-  // console.log(followersArray);
+ 
 
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:
